@@ -1,0 +1,87 @@
+DIV {
+    font-family: 游ゴシック体, 'Yu Gothic', YuGothic, 'ヒラギノ角ゴシック Pro', 'Hiragino Kaku Gothic Pro', メイリオ, Meiryo, Osaka, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+    font-size: 14pt;
+    color: black;
+}
+
+IMG {
+}
+
+BODY    {
+}
+
+.slide  {
+    background-image: url(leaf.jpg);
+}
+
+.header {
+    height: 0px;
+}
+
+.footer {
+    height: 30px;
+}
+
+.left-side, .right-side {
+    width: 40px;
+    background-color: rgba(1,1,1,0);
+}
+
+.title {
+    height: 100px;
+    border-bottom: dotted 2px gray;
+}
+
+.title-item {
+    font-size: 3em;
+    font-weight: bold;
+}
+
+.items  {
+    font-size: 50px;
+}
+
+.presubtitle    {
+    height: 100px;
+}
+
+.presubtitle-item    {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.maintitle    {
+    height: 200px;
+}
+
+.maintitle-item    {
+    font-size: 3.5em;
+    font-weight: bold;
+}
+
+.subtitle    {
+    height: 100px;
+}
+
+.subtitle-item    {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.coveritems  {
+    font-size: 40px;
+}
+
+.centertitle    {
+    height: 400px;
+}
+
+.centertitle-item    {
+    font-size: 3em;
+    font-weight: bold;
+}
+
+.centeritems  {
+    font-size: 40px;
+}
+
