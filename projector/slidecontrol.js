@@ -14,7 +14,7 @@ window.onload = function () {
     var headNode = document.getElementsByTagName("HEAD")[0];
     var linkNode = document.createElement("LINK");
     linkNode.setAttribute("rel", "stylesheet");
-    linkNode.setAttribute("href", "themes/" + theme + "/slidestyle.css");
+    linkNode.setAttribute("href", "projector/themes/" + theme + "/slidestyle.css");
     headNode.appendChild(linkNode);
     setTimeout(function () {
         adjust(loadSlide(true));
@@ -37,23 +37,15 @@ window.onkeydown = function (e) {
             break;
         case 70:    // keyCode = 70 for "F"
             var element = document.documentElement;
-            //if (elem.requestFullScreen) {
-            //    elem.requestFullScreen();
-            //} else if (elem.mozRequestFullScreen) {
-            //    elem.mozRequestFullScreen();
-            //} else if (elem.webkitRequestFullScreen) {
-            //    elem.webkitRequestFullScreen();
-            //}
             if (element.requestFullscreen) {
                 element.requestFullscreen();
             } else if (element.msRequestFullscreen) {
                 element.msRequestFullscreen();
-            }else if (element.mozRequestFullScreen) {
+            } else if (element.mozRequestFullScreen) {
                 element.mozRequestFullScreen();
-            }else if (element.webkitRequestFullscreen) {
+            } else if (element.webkitRequestFullscreen) {
                 element.webkitRequestFullscreen();
             }
-
             break;
     }
 };
@@ -105,7 +97,7 @@ function loadSlide(loading) {
         if (contents[slideNumber][adjustNodes[i]]) {
             node = nodeSlide.getElementsByClassName(adjustNodes[i])[0];
             nodeItem = nodeSlide.getElementsByClassName(adjustNodes[i] + "-item")[0];
-            nodeItem.innerHTML = contents[slideNumber][adjustNodes[i]];
+            textProcessing(nodeItem, contents[slideNumber][adjustNodes[i]]);
             node.style.display = "flex";
         }
     }
@@ -125,7 +117,8 @@ function loadSlide(loading) {
                     aItem = aItem.substr(1);
                 }
                 divNode = document.createElement("DIV");
-                divNode.appendChild(document.createTextNode(aItem));
+                //divNode.appendChild(document.createTextNode(aItem));
+                textProcessing(divNode, aItem);
                 divNode.setAttribute("class", "item-level" + level);
                 node.appendChild(divNode);
             }
@@ -145,7 +138,7 @@ function loadSlide(loading) {
             if (contents[slideNumber][paraNodes[i]]) {
                 nodeItem = nodeSlide.getElementsByClassName(paraNodes[i])[0];
                 if (nodeItem.tagName == "IMG") {
-                    nodeItem.src = "../" + contents[slideNumber][paraNodes[i]];
+                    nodeItem.src = contents[slideNumber][paraNodes[i]];
                 }
                 nodeItem.style.maxWidth = (100.0 / cols) + "%";
                 nodeItem.style.display = "block";
@@ -212,11 +205,9 @@ function adjust(nodeSlide) {
                 minFSize = fSize * 0.01;
                 fUnit = fontSize.substr(String(fSize).length).trim();
                 nodeItem.style.fontSize = fSize + fUnit;
-                console.log(shrinkItems[k], nodeItem.style.fontSize);
                 while (node.clientHeight < nodeItem.clientHeight) {
                     fSize *= 0.95;
                     nodeItem.style.fontSize = fSize + fUnit;
-                    console.log(shrinkItems[k], nodeItem.style.fontSize);
                     if (fSize < minFSize) {
                         break;
                     }
@@ -302,7 +293,7 @@ function contentHeight(nodeSlide, paraClass) {
 }
 
 function getCSSFontSize(matching) {
-    var i, j, reg, nodes,fontSize = null;
+    var i, j, reg, nodes, fontSize = null;
     reg = new RegExp("^." + matching);
     for (i = 0; i < document.styleSheets.length; i++) {
         try {
@@ -317,11 +308,71 @@ function getCSSFontSize(matching) {
             console.log("style sheet issue:", ex, document.styleSheets[i]);
         }
     }
-    if(!fontSize)   {
+    if (!fontSize) {
         nodes = document.getElementsByClassName(matching);
-        if (nodes && nodes[0])  {
+        if (nodes && nodes[0]) {
             fontSize = nodes[0].clientHeight + "px";
         }
     }
     return fontSize;
+}
+
+function textProcessing(pNode, str) {
+    var i, items, src = str, n = 0, node;
+    var matched;
+    while(matched = /\[\[([^\]]+)\]\]/.exec(src))   {
+        items = matched[0].match(/[^\[\]\|]+/g);
+        n = src.indexOf(matched[0]);
+        pNode.appendChild(document.createTextNode(src.substr(0, n)));
+        if (items[0]) {
+            switch (items[0].toLowerCase().trim()) {
+                case "img":
+                    node = document.createElement("IMG");
+                    if (items[1] && items[1].trim() != "") {
+                        node.setAttribute("src", items[1].trim());
+                    }
+                    if (items[2] && items[2].trim() != "") {
+                        node.style.width = items[2].trim();
+                    }
+                    if (items[3] && items[3].trim() != "") {
+                        node.style.height = items[3].trim();
+                    }
+                    pNode.appendChild(node);
+                    break;
+                case "b":
+                    node = document.createElement("STRONG");
+                    if (items[1] && items[1] != "") {
+                        node.appendChild(document.createTextNode(items[1]));
+                    }
+                    pNode.appendChild(node);
+                    break;
+                case "u":
+                    node = document.createElement("U");
+                    if (items[1] && items[1] != "") {
+                        node.appendChild(document.createTextNode(items[1]));
+                    }
+                    pNode.appendChild(node);
+                    break;
+                case "i":
+                    node = document.createElement("I");
+                    if (items[1] && items[1] != "") {
+                        node.appendChild(document.createTextNode(items[1]));
+                    }
+                    pNode.appendChild(node);
+                    break;
+                case "span":
+                    node = document.createElement("SPAN");
+                    if (items[1] && items[1].trim() != "") {
+                        node.setAttribute("class", items[1].trim());
+                    }
+                    if (items[2] && items[2] != "") {
+                        node.appendChild(document.createTextNode(items[2]));
+                    }
+                    pNode.appendChild(node);
+                    break;
+            }
+        }
+        src = src.substr(n + matched[0].length);
+    }
+    pNode.appendChild(document.createTextNode(src));
 }
