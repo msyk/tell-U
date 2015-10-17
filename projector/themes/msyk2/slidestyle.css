@@ -11,7 +11,7 @@ BODY    {
 }
 
 .slide  {
-    background-image: url(leaf.jpg);
+    background-color: #e7f5f2;
 }
 
 .header {
@@ -35,17 +35,16 @@ BODY    {
 .title-item {
     font-size: 3em;
     font-weight: bold;
-    color: #414141;
-    text-shadow: 3px 3px 3px #969696;
+    color: #4b4b4b;
 }
 
 .items  {
-    font-size: 44px;
+    font-size: 50px;
 }
 
 .item-level1 {
     font-weight: bold;
-    color: #414141;
+    color: #616161;
 }
 
 .item-level2 {
@@ -68,9 +67,8 @@ BODY    {
 }
 
 .maintitle-item    {
-    font-size: 4.5em;
+    font-size: 3.5em;
     font-weight: bold;
-    text-shadow: 3px 3px 3px #a2a2a2;
 }
 
 .subtitle    {
@@ -84,6 +82,7 @@ BODY    {
 
 .coveritems  {
     font-size: 40px;
+    font-weight: normal;
 }
 
 .centertitle    {
@@ -91,9 +90,8 @@ BODY    {
 }
 
 .centertitle-item    {
-    font-size: 4em;
+    font-size: 3em;
     font-weight: bold;
-    text-shadow: 3px 3px 3px #a1a1a1;
 }
 
 .centeritems  {
