@@ -286,7 +286,7 @@ function textProcessing(pNode, str) {
                         node.style.width = items[2].trim();
                     }
                     if (items[3] && items[3].trim() != "") {
-                        node.style.height = items[3].trim();
+                        node.style.height = items[3];
                     }
                     pNode.appendChild(node);
                     break;
@@ -295,6 +295,14 @@ function textProcessing(pNode, str) {
                     if (items[1] && items[1] != "") {
                         node.appendChild(document.createTextNode(items[1]));
                     }
+                    pNode.appendChild(node);
+                    break;
+                case "br":
+                    node = document.createElement("BR");
+                    pNode.appendChild(node);
+                    break;
+                case "hr":
+                    node = document.createElement("HR");
                     pNode.appendChild(node);
                     break;
                 case "u":
@@ -328,6 +336,13 @@ function textProcessing(pNode, str) {
                     }
                     if (items[2] && items[2] != "") {
                         node.appendChild(document.createTextNode(items[2]));
+                    }
+                    pNode.appendChild(node);
+                    break;
+                case "pre":
+                    node = document.createElement("pre");
+                    if (items[1] && items[1] != "") {
+                        node.appendChild(document.createTextNode(items[1]));
                     }
                     pNode.appendChild(node);
                     break;

@@ -34,7 +34,6 @@ window.onload = function () {
 
     document.body.onkeydown = function (e) {
         var url;
-        console.log(e.keyCode);
         switch (e.keyCode) {
             case 37:
             case 38:

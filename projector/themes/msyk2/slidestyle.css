@@ -11,7 +11,7 @@ BODY    {
 }
 
 .slide  {
-    background-color: #e7f5f2;
+    background-color: #e7faf6;
 }
 
 .header {
@@ -30,6 +30,11 @@ BODY    {
 .title {
     height: 100px;
     border-bottom: dotted 2px gray;
+    margin-bottom: 20px;
+    padding-right: 100px;
+    background-image: url("../../../images/im-logo.png");
+    background-repeat : no-repeat;
+    background-position : top right; 
 }
 
 .title-item {
@@ -83,6 +88,7 @@ BODY    {
 .coveritems  {
     font-size: 40px;
     font-weight: normal;
+    padding-top: 40px;
 }
 
 .centertitle    {
@@ -102,5 +108,12 @@ DIV .code    {
     background-color: black;
     color: white;
     font-size: 24px;
-    padding: 0 10px 0 10px;
+    padding: 0;
+}
+
+PRE    {
+    background-color: black;
+    color: white;
+    font-size: 24px;
+    padding: 0;
 }
