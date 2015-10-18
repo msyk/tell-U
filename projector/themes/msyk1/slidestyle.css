@@ -41,6 +41,7 @@ BODY    {
 
 .items  {
     font-size: 44px;
+    background-color: rgba(1,1,1,0.3);
 }
 
 .item-level1 {
