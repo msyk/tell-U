@@ -2,7 +2,7 @@
  * Created by msyk on 15/10/09.
  */
 
-function loadSlide(loading, baseNode) {
+function loadSlide(loading, baseNode, showOnly) {
     var level, aItem, divNode, slideDelete, nodeSlides, nodeSlide, maxImgWidth = 100, w;
     var i, j, node, nodes, nodeItem, cols, closeId = null, openId = null, closeZ = null;
 
@@ -88,6 +88,10 @@ function loadSlide(loading, baseNode) {
         node.style.display = "flex";
     }
 
+    if (showOnly)   {
+        nodeSlide.style.opacity = 1.0;
+        return nodeSlide;
+    }
     // After showing second or later slide.
     if (closeId) {
         slideDelete = document.getElementById(closeId);
@@ -143,7 +147,7 @@ function adjust(nodeSlide) {
             fontSize = getCSSFontSize(shrinkItems[k] + "-item");
             if (fontSize) {
                 fSize = parseFloat(fontSize);
-                minFSize = fSize * 0.01;
+                minFSize = fSize * 0.001;
                 fUnit = fontSize.substr(String(fSize).length).trim();
                 nodeItem.style.fontSize = fSize + fUnit;
                 while (node.clientHeight < nodeItem.clientHeight) {
@@ -163,7 +167,7 @@ function adjust(nodeSlide) {
             fontSize = getCSSFontSize(shrinkLists[k]);
             if (fontSize) {
                 fSize = parseFloat(fontSize);
-                minFSize = fSize * 0.1;
+                minFSize = fSize * 0.001;
                 fUnit = fontSize.substr(String(fSize).length).trim();
                 nodeItem.style.fontSize = fSize + fUnit;
                 while (window.innerHeight < contentHeight(nodeSlide)) {
@@ -184,7 +188,7 @@ function adjust(nodeSlide) {
                 fontSize = getCSSFontSize(paraLists[k]);
                 if (fontSize) {
                     fSize = parseFloat(fontSize);
-                    minFSize = fSize * 0.1;
+                    minFSize = fSize * 0.001;
                     fUnit = fontSize.substr(String(fSize).length).trim();
                     nodeItem.style.fontSize = fSize + fUnit;
                     while (window.innerHeight < contentHeight(nodeSlide, paraLists[k])) {

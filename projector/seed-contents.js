@@ -2,18 +2,39 @@
  * Created by msyk on 15/10/12.
  */
 
-var theme = "msyk1";
-var transition = "fade";
+var config = {
+    theme: "msyk1",
+    transition: "fade"
+};
+
 var contents = [
     {
-        presubtitle: "A Bad Title for You!",
-        maintitle: "A Bad Title for You!",
-        subtitle: "A Bad Title for You!",
+        presubtitle: "The subtitle for you",
+        maintitle: "Your Best Presentation Title",
+        subtitle: "The another subtitle for you",
         coveritems: [
-            "A Bad Title for You!",
-            "A Bad Title for You!",
-            "A Bad Title for You!",
-            "A Bad Title for You!"
+            "The date of presentation so on.",
+            "Your name, who are you?",
+            "Your company, your title of position",
+            "Your email, Twitter account."
+        ]
+    },
+    {
+        title: "A Good Title for You!",
+        items: [
+            "First gread item",
+            "-Happy sub items you knows who knows",
+            "--OK! sub-sub items you knows who knows",
+            "--NO! sub-sub items you knows who knows",
+            "Second stunning item",
+            "-Happy sub items you knows who knows",
+            "-Happy sub items you knows who knows",
+            "Third best item",
+            "-Happy sub items you knows who knows",
+            "-Happy sub items you knows who knows",
+            "Fource forced item",
+            "-Happy sub items you knows who knows",
+            "-Happy sub items you knows who knows"
         ]
     },
     {
@@ -51,7 +72,8 @@ var contents = [
             "Fource forced item",
             "-Happy sub items you knows who knows",
             "-Happy sub items you knows who knows"
-        ]
+        ],
+        fig1: "images/photo1.jpg"
     },
     {
         title: "A Good Title for You!",
@@ -70,6 +92,7 @@ var contents = [
             "-Happy sub items you knows who knows"
         ],
         fig1: "images/photo1.jpg",
+        maximagewidth: 20
     },
     {
         title: "A Good Title for You!",

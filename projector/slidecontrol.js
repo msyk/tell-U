@@ -24,8 +24,12 @@ window.onload = function () {
         adjust(loadSlide(true, document.body));
     }, 100);
 
-    window.onclick = function () {
-        moveSlide(+1);
+    window.onclick = function (e) {
+        if (e.clientX > window.innerWidth / 2) {
+            moveSlide(+1);
+        } else {
+            moveSlide(-1);
+        }
     };
 
     document.body.onkeydown = function (e) {
