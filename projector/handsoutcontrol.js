@@ -28,41 +28,19 @@ window.onload = function () {
 };
 
 function buildHandsout() {
-    var i, boxWidth, boxHeight, columnNumber, indexH, indexV, node, rootNode;
-    var gapLength, slideNode;
+    var i, node, rootNode, slideNode;
 
     rootNode = document.getElementById("back");
-    boxWidth = 1280;
-    boxHeight = 800;
-
-    columnNumber = 1;
     for (i = 0; i < contents.length; i++) {
-        indexH = i % columnNumber;
-        indexV = Math.floor(i / columnNumber);
         node = document.createElement("DIV");
-        //node.style.left = (boxWidth * indexH + gapLength * indexH) + "px";
-        //node.style.top = (boxHeight * indexV + gapLength * indexV) + "px";
-        node.style.width = (boxWidth * columnNumber) + "px";
-        node.style.height = (boxHeight * columnNumber) + "px";
+        node.style.width = "100%";
         node.style.height = "100vh";
-        //node.style.backgroundColor = "black";
-        //node.style.position = "absolute";
-        //node.style.pageBreakAfter = "always";
-        //node.style.pageBreakBefore = "always";
         rootNode.appendChild(node);
         slideNode = loadSlide(false, node, true);
-        //slideNode.style.transform =
-        //    "translate(" + (-boxWidth / columnNumber) + "px," + (-boxHeight / columnNumber) + "px)" +
-        //    "scale(" + (1 / columnNumber) + "," + (1 / columnNumber) + ")";
         adjust(slideNode);
         slideNumber++;
         node = document.createElement("DIV");
-        //node.style.left = (boxWidth * indexH + gapLength * indexH) + "px";
-        //node.style.top = (boxHeight * (indexV + 1) + gapLength * indexV) + "px";
-        node.style.width = (boxWidth * columnNumber) + "px";
-        //node.style.height = "14px";
-        //node.style.backgroundColor = "black";
-        //node.style.position = "absolute";
+        node.style.width = "100%";
         node.style.textAlign = "right";
         node.style.pageBreakAfter = "always";
         node.appendChild(
