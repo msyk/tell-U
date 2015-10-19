@@ -28,19 +28,34 @@ window.onload = function () {
 };
 
 function buildHandsout() {
+    var isUserFullScreen = true;
     var i, node, rootNode, slideNode, width;
+    width = 242;
 
     rootNode = document.getElementById("back");
     for (i = 0; i < contents.length; i++) {
         node = document.createElement("DIV");
-        node.style.width = "100%";
-        node.style.height = "100%";
+        if (isUserFullScreen)   {
+            node.style.width = "100%";
+            node.style.height = "100%";
+        } else {
+            node.style.width = width + "mm";
+            node.style.height = width * 0.7 + "mm";
+        }
         rootNode.appendChild(node);
         slideNode = loadSlide(false, node, true);
+        if (!isUserFullScreen) {
+            slideNode.style.width = width + "mm";
+            slideNode.style.height = width * 0.7 + "mm";
+        }
         adjust(slideNode);
         slideNumber++;
         node = document.createElement("DIV");
-        node.style.width = "100%";
+        if (isUserFullScreen)   {
+            node.style.width = "100%";
+        } else {
+            node.style.width = width + "mm";
+        }
         node.style.textAlign = "right";
         node.style.pageBreakAfter = "always";
         node.appendChild(
