@@ -28,13 +28,13 @@ window.onload = function () {
 };
 
 function buildHandsout() {
-    var i, node, rootNode, slideNode;
+    var i, node, rootNode, slideNode, width;
 
     rootNode = document.getElementById("back");
     for (i = 0; i < contents.length; i++) {
         node = document.createElement("DIV");
         node.style.width = "100%";
-        node.style.height = "100vh";
+        node.style.height = "100%";
         rootNode.appendChild(node);
         slideNode = loadSlide(false, node, true);
         adjust(slideNode);
