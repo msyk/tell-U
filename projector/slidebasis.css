@@ -1,9 +1,9 @@
 .slide {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     top: 0;
     left: 0;
-    position: absolute;
+    /*position: absolute;*/
     overflow: hidden;
 
     display: flex;
@@ -75,6 +75,7 @@
     display: none;
     height: auto;
 
+    flex-direction: column;
     flex-grow: 10;
     flex-shrink: 10;
     flex-basis: auto;
@@ -99,6 +100,74 @@
     font-size: 80%;
     display: list-item;
     list-style-type: disc;
+}
+
+.item-level4 {
+    font-size: 100%;
+    text-align: center;
+}
+
+.item-level5 {
+    font-size: 100%;
+    text-align: right;
+}
+
+.centeritem-level1 {
+    margin-left: 0;
+    font-size: 100%;
+}
+
+.centeritem-level2 {
+    margin-left: 3em;
+    font-size: 90%;
+    display: list-item;
+    list-style-type: disc;
+}
+
+.centeritem-level3 {
+    margin-left: 5em;
+    font-size: 80%;
+    display: list-item;
+    list-style-type: disc;
+}
+
+.centeritem-level4 {
+    font-size: 100%;
+    text-align: center;
+}
+
+.centeritem-level5 {
+    font-size: 100%;
+    text-align: right;
+}
+
+.coveritem-level1 {
+    margin-left: 0;
+    font-size: 100%;
+}
+
+.coveritem-level2 {
+    margin-left: 3em;
+    font-size: 90%;
+    display: list-item;
+    list-style-type: disc;
+}
+
+.coveritem-level3 {
+    margin-left: 5em;
+    font-size: 80%;
+    display: list-item;
+    list-style-type: disc;
+}
+
+.coveritem-level4 {
+    font-size: 100%;
+    text-align: center;
+}
+
+.coveritem-level5 {
+    font-size: 100%;
+    text-align: right;
 }
 
 BODY {

@@ -34,19 +34,19 @@ function buildHandsout() {
     rootNode = document.getElementById("back");
     boxWidth = 1280;
     boxHeight = 800;
-    gapLength = 78;
 
     columnNumber = 1;
     for (i = 0; i < contents.length; i++) {
         indexH = i % columnNumber;
         indexV = Math.floor(i / columnNumber);
         node = document.createElement("DIV");
-        node.style.left = (boxWidth * indexH + gapLength * indexH) + "px";
-        node.style.top = (boxHeight * indexV + gapLength * indexV) + "px";
+        //node.style.left = (boxWidth * indexH + gapLength * indexH) + "px";
+        //node.style.top = (boxHeight * indexV + gapLength * indexV) + "px";
         node.style.width = (boxWidth * columnNumber) + "px";
         node.style.height = (boxHeight * columnNumber) + "px";
+        node.style.height = "100vh";
         //node.style.backgroundColor = "black";
-        node.style.position = "absolute";
+        //node.style.position = "absolute";
         //node.style.pageBreakAfter = "always";
         //node.style.pageBreakBefore = "always";
         rootNode.appendChild(node);
@@ -57,13 +57,14 @@ function buildHandsout() {
         adjust(slideNode);
         slideNumber++;
         node = document.createElement("DIV");
-        node.style.left = (boxWidth * indexH + gapLength * indexH) + "px";
-        node.style.top = (boxHeight * (indexV + 1) + gapLength * indexV) + "px";
+        //node.style.left = (boxWidth * indexH + gapLength * indexH) + "px";
+        //node.style.top = (boxHeight * (indexV + 1) + gapLength * indexV) + "px";
         node.style.width = (boxWidth * columnNumber) + "px";
-        node.style.height = "14px";
+        //node.style.height = "14px";
         //node.style.backgroundColor = "black";
-        node.style.position = "absolute";
+        //node.style.position = "absolute";
         node.style.textAlign = "right";
+        node.style.pageBreakAfter = "always";
         node.appendChild(
             document.createTextNode("Page: " + slideNumber + " / " + contents.length));
         rootNode.appendChild(node);

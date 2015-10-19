@@ -4,7 +4,9 @@
 
 var config = {
     theme: "msyk1",
-    transition: "fade"
+    transition: "fade",
+    openParen: "#",
+    closeParen: "\\$"
 };
 
 var contents = [
@@ -22,19 +24,21 @@ var contents = [
     {
         title: "A Good Title for You!",
         items: [
-            "First gread item",
-            "-Happy sub items you knows who knows",
-            "--OK! sub-sub items you knows who knows",
-            "--NO! sub-sub items you knows who knows",
+            "This is Level 1 item.",
+            "-Level 2 item starts with ONE dash (-).",
+            "--Level 3 item starts with TWO dash (--).",
+            "--This is Level3 item too.",
             "Second stunning item",
             "-Happy sub items you knows who knows",
+            "---Level 4 (starts with 3 dashes) is centering text",
+            "----Level 5 (starts with 4 dashes) is right-aligned text",
             "-Happy sub items you knows who knows",
-            "Third best item",
-            "-Happy sub items you knows who knows",
-            "-Happy sub items you knows who knows",
-            "Fource forced item",
-            "-Happy sub items you knows who knows",
-            "-Happy sub items you knows who knows"
+            "Inline image",
+            "-[[IMG|images/photo1.jpg|20px|20px]] shows ##IMG|images/photo1.jpg|30px|30px$$",
+            "Text Decorations",
+            "-[[B|Bold]] shows ##B|Bold$$, [[I|Italic]] shows ##I|Italic$$, [[U|Underline]] shows ##U|Underline$$,",
+            "-[[BR]], [[HR]] for BR and HR tag.",
+            "-[[SPAN|c|Text]] and [[DIV|c|Text]] for SPAN and DIV tag with the class c."
         ]
     },
     {
@@ -58,11 +62,8 @@ var contents = [
         ]
     },
     {
-        title: "A Good Title for You!",
+        title: "IN 'items' Descrption",
         items: [
-            "First gread item",
-            "-Happy sub items you knows who knows",
-            "-Happy sub items you knows who knows",
             "Second stunning item",
             "-Happy sub items you knows who knows",
             "-Happy sub items you knows who knows",
@@ -122,7 +123,7 @@ var contents = [
     },
     {
         title: "A Bad Title for You!",
-        fig2: "images/photo2.jpg"
+        fig1: "images/photo2.jpg"
     },
     {
         title: "A Bad Title for You!",
@@ -135,9 +136,5 @@ var contents = [
         fig2: "images/photo2.jpg",
         fig3: "images/photo3.jpg"
     },
-    {
-        title: "A Bad Title for You!",
-        fig1: "images/photo1.jpg"
-    }
 ];
 

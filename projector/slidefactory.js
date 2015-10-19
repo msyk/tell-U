@@ -51,7 +51,8 @@ function loadSlide(loading, baseNode, showOnly) {
                 divNode = document.createElement("DIV");
                 //divNode.appendChild(document.createTextNode(aItem));
                 textProcessing(divNode, aItem);
-                divNode.setAttribute("class", "item-level" + level);
+                divNode.setAttribute("class",
+                    multiItemNodes[i].substring(0,multiItemNodes[i].length-1) + "-level" + level);
                 node.appendChild(divNode);
             }
             node.style.display = "flex";

@@ -24,7 +24,6 @@ BODY    {
 
 .left-side, .right-side {
     width: 40px;
-    background-color: rgba(1,1,1,0);
 }
 
 .title {
@@ -41,7 +40,30 @@ BODY    {
 
 .items  {
     font-size: 44px;
-    background-color: rgba(1,1,1,0.3);
+}
+
+.centeritem-level1 {
+}
+
+.centeritem-level2 {
+}
+
+.centeritem-level3 {
+}
+
+.centeritem-level4 {
+}
+
+.coveritem-level1 {
+}
+
+.coveritem-level2 {
+}
+
+.coveritem-level3 {
+}
+
+.coveritem-level4 {
 }
 
 .item-level1 {
@@ -53,6 +75,9 @@ BODY    {
 }
 
 .item-level3 {
+}
+
+.item-level4 {
 }
 
 .presubtitle    {
