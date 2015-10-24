@@ -83,6 +83,10 @@ window.onload = function () {
     window.onresize = function () {
         adjust();
     };
+    
+    window.onhashchange = function () {
+		location.reload();
+    };
 
 }
 function moveSlide(bias, absolute) {
@@ -102,6 +106,13 @@ function moveSlide(bias, absolute) {
         slideNumber = 0;
     } else {
         slide = loadSlide(false, document.body);
+        
+        url = document.URL;
+        if (url.match(/#/)) {
+            url = url.split(/#/)[0];
+        }
+        document.location.href = url + "#" + (slideNumber + 1);
+
         setTimeout(function () {
             adjust(slide);
         }, 100);
