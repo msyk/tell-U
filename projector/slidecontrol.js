@@ -116,11 +116,11 @@ function setupURL() {
 }
 
 function fullScreen() {
-    console.log("#");
     var element = document.documentElement;
     if (element.requestFullscreen) {
         element.requestFullscreen();
     } else if (element.msRequestFullscreen) {
+        element = document.getElementsByClassName("slide")[0];
         element.msRequestFullscreen();
     } else if (element.mozRequestFullScreen) {
         element.mozRequestFullScreen();

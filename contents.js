@@ -3,138 +3,102 @@
  */
 
 var config = {
-    theme: "msyk1",
+    theme: "msyk2",
     transition: "fade",
-    openParen: "#",
-    closeParen: "\\$"
+    //openParen: "#",
+    //closeParen: "\\$"
 };
 
 var contents = [
     {
-        presubtitle: "The subtitle for you",
-        maintitle: "Your Best Presentation Title",
-        subtitle: "The another subtitle for you",
+        presubtitle: "トップエスイー講座説明会",
+        maintitle: "修了生体験談",
+        //subtitle: "The another subtitle for you",
         coveritems: [
-            "The date of presentation so on.",
-            "Your name, who are you?",
-            "Your company, your title of position",
-            "Your email, Twitter account."
+            "2015年11月27日 (金)",
+            "新居雅行　Masayuki Nii",
+            "国立情報学研究所 特任研究員, 博士(工学)",
+            "トップエスイー事務局(情報部)",
+            "[[IMG|images/email.png|30px|30px]] msyk@nii.ac.jp "
+            + "[[IMG|images/facebook.png|30px|30px]] msyknii "
+            + "[[IMG|images/twitter.png|30px|30px]] msyk_nii"
         ]
     },
     {
-        title: "A Good Title for You!",
+        title: "私がトップエスイーで実現できたこと",
+        fig1: "images/fig1.png"
+    },
+    {
+        title: "途中のプロセスは？",
+        fig1: "images/fig2.png"
+    },
+    {
+        title: "途中のプロセスをもう少し詳しく",
+        fig1: "images/fig3.png"
+    },
+    {
+        title: "トップエスイーに至るまで",
         items: [
-            "This is Level 1 item.",
-            "-Level 2 item starts with ONE dash (-).",
-            "--Level 3 item starts with TWO dash (--).",
-            "--This is Level3 item too.",
-            "Second stunning item",
-            "-Happy sub items you knows who knows",
-            "---Level 4 (starts with 3 dashes) is centering text",
-            "----Level 5 (starts with 4 dashes) is right-aligned text",
-            "-Happy sub items you knows who knows",
-            "Inline image",
-            "-[[IMG|images/photo1.jpg|20px|20px]] shows ##IMG|images/photo1.jpg|30px|30px$$",
-            "Text Decorations",
-            "-[[B|Bold]] shows ##B|Bold$$, [[I|Italic]] shows ##I|Italic$$, [[U|Underline]] shows ##U|Underline$$,",
-            "-[[BR]], [[HR]] for BR and HR tag.",
-            "-[[SPAN|c|Text]] and [[DIV|c|Text]] for SPAN and DIV tag with the class c."
+            "昭和時代に工学系大学修士課程を修了",
+            "-電気工学専攻（古い！）だが、人間工学的な研究をした",
+            "IT業界に近いところで非エンジニアとして18年",
+            "-新卒で出版社に入社（ジャーナリスト）",
+            "-小企業に転職（コンサルタント→テクニカルライター）",
+            "-独立してトレーナー→外資系企業でトレーニングビジネス",
+            "45歳で「フリーのシステム開発のエンジニア」になる",
+            "-小規模な請負のSIビジネスが中心となる",
+            "-博士取得を試みる→失敗→まともに勉強し直す必要性",
+            "-情報処理学会誌の挟み込みチラシを見て入学を決意"
         ]
     },
     {
-        title: "A Long Long Long Long Long Long Long Long Long Long Long Long Long Long Title for You!",
+        title: "トップエスイー(6期: 2011-2012)において",
         items: [
-            "First sock item. First sock item. First sock item. First sock item. First sock item. First sock item. First sock item. ",
-            "-Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.",
-            "-Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.",
-            "First sock item. First sock item. First sock item. First sock item. First sock item. First sock item. First sock item. ",
-            "-Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.",
-            "-Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.",
-            "First sock item. First sock item. First sock item. First sock item. First sock item. First sock item. First sock item. ",
-            "-Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.",
-            "-Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.",
-            "First sock item. First sock item. First sock item. First sock item. First sock item. First sock item. First sock item. ",
-            "-Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.",
-            "-Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.",
-            "First sock item. First sock item. First sock item. First sock item. First sock item. First sock item. First sock item. ",
-            "-Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.",
-            "-Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.Sad sub items.",
+            "アーキテクチャ、上流工程を中心に履修",
+            "-プログラミングをすることだけが開発ではないことが、かなり深く理解できた",
+            "普段知り合えない同業者と知り合えた",
+            "-開発コミュニティは結構狭い、特に小企業・フリーの集まりは顕著",
+            "-業務上の細かな話はできないとは言え、同じような現場で、同じように悩む同級生の存在が励みになる",
+            "夜に通うのはきついとは言え、純粋に楽しかった",
+            "-実世界での業務においては、正当性や妥当性よりも、世俗的なことに優先されがち",
+            "-ある意味「まともな世界」に身を置けるという点で、気持ち良かった",
+            "-仕事の上での「低い志」から解放される場でもあった"
         ]
     },
     {
-        title: "IN 'items' Descrption",
-        items: [
-            "Second stunning item",
-            "-Happy sub items you knows who knows",
-            "-Happy sub items you knows who knows",
-            "Third best item",
-            "-Happy sub items you knows who knows",
-            "-Happy sub items you knows who knows",
-            "Fource forced item",
-            "-Happy sub items you knows who knows",
-            "-Happy sub items you knows who knows"
-        ],
-        fig1: "images/photo1.jpg"
+        title: "トップエスイーのコンセプトから得たもの",
+        fig1: "images/fig4.png"
     },
     {
-        title: "A Good Title for You!",
-        items: [
-            "First gread item",
-            "-Happy sub items you knows who knows",
-            "-Happy sub items you knows who knows",
-            "Second stunning item",
-            "-Happy sub items you knows who knows",
-            "-Happy sub items you knows who knows",
-            "Third best item",
-            "-Happy sub items you knows who knows",
-            "-Happy sub items you knows who knows",
-            "Fource forced item",
-            "-Happy sub items you knows who knows",
-            "-Happy sub items you knows who knows"
-        ],
-        fig1: "images/photo1.jpg",
-        maximagewidth: 20
+        title: "トップエスイーでの学習から得たもの",
+        fig1: "images/fig5.png"
     },
     {
-        title: "A Good Title for You!",
+        title: "他の手段で学習できたのか？",
         items: [
-            "First gread item",
-            "-Happy sub items you knows who knows",
-            "-Happy sub items you knows who knows",
-            "Second stunning item",
-            "-Happy sub items you knows who knows",
-            "-Happy sub items you knows who knows",
-            "Third best item",
-            "-Happy sub items you knows who knows",
-            "-Happy sub items you knows who knows",
-            "Fource forced item",
-            "-Happy sub items you knows who knows",
-            "-Happy sub items you knows who knows"
-        ],
-        fig1: "images/photo1.jpg",
-        fig3: "images/photo3.jpg"
-    },
-    {
-        centertitle: "A Bad Title for You!",
-        centeritems: [
-            "First sock item",
-            "-Sad sub items"
+            "様々な学習方法がある",
+            "-独習",
+            "--[Pros] 自由な時間",
+            "--[Cons] モチベーションの維持が困難",
+            "-オンラインサイト",
+            "--[Pros] 自由な時間、まとまった内容",
+            "--[Cons] スキルセットよりもページビューを稼ぐため？",
+            "--[Cons] 受けるかどうかを重視したコンテンツ",
+            "--[Cons] 求人ビジネスの人集めの面が垣間見られる",
+            "-勉強会、コミュニティへの参加",
+            "--[Cons] 持ち回り方式は当たり外れがある",
+            "--[Cons] いつも決まった人が出てくる",
+            "--[Cons] 主催者自身のプレゼンスのため？",
+            "トップエスイーの決定的違いは？",
+            "-世間は良くも悪くも「偉い人の発言」オリエンテッド",
+            "-トップエスイーは「正しくて役に立つこと」がベース"
         ]
     },
     {
-        title: "A Bad Title for You!",
-        fig1: "images/photo2.jpg"
+        title: "どんなエンジニアになれたのか？",
+        fig1: "images/fig6.png"
     },
     {
-        title: "A Bad Title for You!",
-        fig1: "images/photo1.jpg",
-        fig3: "images/photo3.jpg"
-    },
-    {
-        title: "A Bad Title for You!",
-        fig1: "images/photo1.jpg",
-        fig2: "images/photo2.jpg",
-        fig3: "images/photo3.jpg"
-    },
+        centertitle: "Q&A"
+    }
 ];
-

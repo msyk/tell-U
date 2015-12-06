@@ -83,7 +83,7 @@ function loadSlide(loading, baseNode, showOnly) {
                     nodeItem.src = contents[slideNumber][paraNodes[i]];
                     nodeItem.style.maxWidth = w + "%";
                 }
-                nodeItem.style.display = "block";
+                nodeItem.style.display = "flex";
             }
         }
         node.style.display = "flex";
@@ -201,11 +201,21 @@ function adjust(nodeSlide) {
                     }
                 }
             } else {
-                fSize = parseFloat(nodeItem.style.maxWidth);
-                minFSize = 3;
+                //fSize = parseFloat(nodeItem.style.maxWidth);
+                //minFSize = 3;
+                //while (window.innerHeight < contentHeight(nodeSlide, paraLists[k])) {
+                //    fSize *= 0.95;
+                //    nodeItem.style.maxWidth = fSize + "%";
+                //    if (fSize < minFSize) {
+                //        break;
+                //    }
+                //}
+                fSize = parseFloat(nodeItem.parentNode.clientHeight) * 2;
+                nodeItem.style.width = fSize + "px";
+                minFSize = 120;
                 while (window.innerHeight < contentHeight(nodeSlide, paraLists[k])) {
                     fSize *= 0.95;
-                    nodeItem.style.maxWidth = fSize + "%";
+                    nodeItem.style.width = fSize + "px";
                     if (fSize < minFSize) {
                         break;
                     }
