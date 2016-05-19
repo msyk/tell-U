@@ -152,7 +152,8 @@ function loadSlide(loading, baseNode, showOnly) {
 }
 
 function adjust(nodeSlide) {
-    var k, fontSize, fSize, fUnit, minFSize, node, nodeItem;
+    var k, fontSize, fSize, fUnit, minFSize, node,
+        nodeItem, sizeItems, sizeMore, itemsNode, moreNode, unitItems, unitMore;
     var shrinkItems = ["title", "presubtitle", "maintitle", "subtitle", "centertitle"];
     var shrinkLists = ["coveritems", "centeritems"];
     var paraLists = ["items", "itemsmore", "fig1", "fig2", "fig3"];
@@ -202,6 +203,8 @@ function adjust(nodeSlide) {
         }
     }
 
+    sizeItems = -1;
+    sizeMore = -1;
     for (k = 0; k < paraLists.length; k++) {
         nodeItem = nodeSlide.getElementsByClassName(paraLists[k])[0];
         if (nodeItem) {
@@ -219,6 +222,15 @@ function adjust(nodeSlide) {
                             if (fSize < minFSize) {
                                 break;
                             }
+                        }
+                        if (paraLists[k] == "items"){
+                            itemsNode = nodeItem;
+                            sizeItems = fSize;
+                            unitItems = fUnit;
+                        } else if(paraLists[k] == "itemsmore") {
+                            moreNode = nodeItem;
+                            sizeMore = fSize;
+                            unitMore = fUnit;
                         }
                     }
                 } else {
@@ -243,6 +255,13 @@ function adjust(nodeSlide) {
                     }
                 }
             }
+        }
+    }
+    if (sizeItems > -1 && sizeMore > -1)    {
+        if (sizeItems > sizeMore)   {
+            itemsNode.style.fontSize = sizeMore + unitMore;
+        } else {
+            moreNode.style.fontSize = sizeItems + unitItems;
         }
     }
 }
