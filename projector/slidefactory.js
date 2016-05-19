@@ -4,7 +4,7 @@
 
 function loadSlide(loading, baseNode, showOnly) {
     var level, aItem, divNode, slideDelete, nodeSlides, nodeSlide, maxImgWidth = 100, w;
-    var i, j, node, nodes, nodeItem, cols, closeId = null, openId = null, closeZ = null;
+    var i, j, node, nodes, nodeItem, cols, closeId = null, openId = null, closeZ = null, cKey;
 
     // Get current slide.
     nodeSlides = document.getElementsByClassName("slide");
@@ -34,33 +34,37 @@ function loadSlide(loading, baseNode, showOnly) {
         }
     }
     // Set multiple item nodes.
-    var multiItemNodes = ["coveritems", "centeritems", "items"];
+    var multiItemNodes = ["coveritems", "centeritems", "items", "itemsmore"];
     for (i = 0; i < multiItemNodes.length; i++) {
         if (contents[slideNumber][multiItemNodes[i]]) {
             node = nodeSlide.getElementsByClassName(multiItemNodes[i])[0];
-            while (node.childNodes.length > 0) {
-                node.removeChild(node.childNodes[0]);
-            }
-            for (j = 0; j < contents[slideNumber][multiItemNodes[i]].length; j++) {
-                level = 1;
-                aItem = contents[slideNumber][multiItemNodes[i]][j];
-                while (aItem.substr(0, 1) == "-") {
-                    level++;
-                    aItem = aItem.substr(1);
+            if(node) {
+                while (node.childNodes.length > 0) {
+                    node.removeChild(node.childNodes[0]);
                 }
-                divNode = document.createElement("DIV");
-                //divNode.appendChild(document.createTextNode(aItem));
-                textProcessing(divNode, aItem);
-                divNode.setAttribute("class",
-                    multiItemNodes[i].substring(0,multiItemNodes[i].length-1) + "-level" + level);
-                node.appendChild(divNode);
+                for (j = 0; j < contents[slideNumber][multiItemNodes[i]].length; j++) {
+                    level = 1;
+                    aItem = contents[slideNumber][multiItemNodes[i]][j];
+                    while (aItem.substr(0, 1) == "-") {
+                        level++;
+                        aItem = aItem.substr(1);
+                    }
+                    divNode = document.createElement("DIV");
+                    //divNode.appendChild(document.createTextNode(aItem));
+                    textProcessing(divNode, aItem);
+                    cKey = multiItemNodes[i];
+                    cKey = (cKey == "itemsmore") ? "items" : cKey;
+                    divNode.setAttribute("class",
+                        cKey.substring(0, cKey.length - 1) + "-level" + level);
+                    node.appendChild(divNode);
+                }
+                node.style.display = "flex";
             }
-            node.style.display = "flex";
         }
     }
 
     // Setup parallel nodes.
-    var paraNodes = ["fig1", "fig2", "fig3", "items"];
+    var paraNodes = ["fig1", "fig2", "fig3", "items", "itemsmore"];
     cols = 0;
     for (i = 0; i < paraNodes.length; i++) {
         cols += (contents[slideNumber][paraNodes[i]] ? 1 : 0)
@@ -75,21 +79,37 @@ function loadSlide(loading, baseNode, showOnly) {
         for (i = 0; i < paraNodes.length; i++) {
             if (contents[slideNumber][paraNodes[i]]) {
                 nodeItem = nodeSlide.getElementsByClassName(paraNodes[i])[0];
-                w = 100.0 / cols;
-                if (w > maxImgWidth && nodeItem.tagName == "IMG") {
-                    w = maxImgWidth;
-                }
-                if (nodeItem.tagName == "IMG") {
-                    nodeItem.src = contents[slideNumber][paraNodes[i]];
+                if(nodeItem) {
+                    if (cols == 1) {
+                        node.style.justifyContent = "center";
+                    }
+                    w = 100.0 / cols;
+                    if (w > maxImgWidth && nodeItem.tagName == "IMG") {
+                        w = maxImgWidth;
+                    }
+                    if (nodeItem.tagName == "IMG") {
+                        nodeItem.src = contents[slideNumber][paraNodes[i]];
+                    }
                     nodeItem.style.maxWidth = w + "%";
+                    nodeItem.style.display = "flex";
                 }
-                nodeItem.style.display = "flex";
             }
         }
         node.style.display = "flex";
     }
 
-    if (showOnly)   {
+    // Set page number
+    nodes = document.getElementsByClassName("page");
+    for (i = 0; i < nodes.length; i++) {
+        nodes[i].innerHTML = slideNumber;
+        if (!contents[slideNumber]["maintitle"]) {
+            nodes[i].style.display = "";
+        } else {
+            nodes[i].style.display = "none";
+        }
+    }
+
+    if (showOnly) {
         nodeSlide.style.opacity = 1.0;
         return nodeSlide;
     }
@@ -135,7 +155,7 @@ function adjust(nodeSlide) {
     var k, fontSize, fSize, fUnit, minFSize, node, nodeItem;
     var shrinkItems = ["title", "presubtitle", "maintitle", "subtitle", "centertitle"];
     var shrinkLists = ["coveritems", "centeritems"];
-    var paraLists = ["items", "fig1", "fig2", "fig3"];
+    var paraLists = ["items", "itemsmore", "fig1", "fig2", "fig3"];
 
     if (!nodeSlide) {
         nodeSlide = document.getElementsByClassName("slide")[0];
@@ -184,40 +204,42 @@ function adjust(nodeSlide) {
 
     for (k = 0; k < paraLists.length; k++) {
         nodeItem = nodeSlide.getElementsByClassName(paraLists[k])[0];
-        if (nodeItem.style.display != "none" && nodeItem.style.display != "") {
-            if (nodeItem.tagName != "IMG") {
-                fontSize = getCSSFontSize(paraLists[k]);
-                if (fontSize) {
-                    fSize = parseFloat(fontSize);
-                    minFSize = fSize * 0.001;
-                    fUnit = fontSize.substr(String(fSize).length).trim();
-                    nodeItem.style.fontSize = fSize + fUnit;
+        if (nodeItem) {
+            if (nodeItem.style.display != "none" && nodeItem.style.display != "") {
+                if (nodeItem.tagName != "IMG") {
+                    fontSize = getCSSFontSize(paraLists[k]);
+                    if (fontSize) {
+                        fSize = parseFloat(fontSize);
+                        minFSize = fSize * 0.001;
+                        fUnit = fontSize.substr(String(fSize).length).trim();
+                        nodeItem.style.fontSize = fSize + fUnit;
+                        while (window.innerHeight < contentHeight(nodeSlide, paraLists[k])) {
+                            fSize *= 0.95;
+                            nodeItem.style.fontSize = fSize + fUnit;
+                            if (fSize < minFSize) {
+                                break;
+                            }
+                        }
+                    }
+                } else {
+                    //fSize = parseFloat(nodeItem.style.maxWidth);
+                    //minFSize = 3;
+                    //while (window.innerHeight < contentHeight(nodeSlide, paraLists[k])) {
+                    //    fSize *= 0.95;
+                    //    nodeItem.style.maxWidth = fSize + "%";
+                    //    if (fSize < minFSize) {
+                    //        break;
+                    //    }
+                    //}
+                    fSize = parseFloat(nodeItem.parentNode.clientHeight) * 2;
+                    nodeItem.style.width = fSize + "px";
+                    minFSize = 120;
                     while (window.innerHeight < contentHeight(nodeSlide, paraLists[k])) {
                         fSize *= 0.95;
-                        nodeItem.style.fontSize = fSize + fUnit;
+                        nodeItem.style.width = fSize + "px";
                         if (fSize < minFSize) {
                             break;
                         }
-                    }
-                }
-            } else {
-                //fSize = parseFloat(nodeItem.style.maxWidth);
-                //minFSize = 3;
-                //while (window.innerHeight < contentHeight(nodeSlide, paraLists[k])) {
-                //    fSize *= 0.95;
-                //    nodeItem.style.maxWidth = fSize + "%";
-                //    if (fSize < minFSize) {
-                //        break;
-                //    }
-                //}
-                fSize = parseFloat(nodeItem.parentNode.clientHeight) * 2;
-                nodeItem.style.width = fSize + "px";
-                minFSize = 120;
-                while (window.innerHeight < contentHeight(nodeSlide, paraLists[k])) {
-                    fSize *= 0.95;
-                    nodeItem.style.width = fSize + "px";
-                    if (fSize < minFSize) {
-                        break;
                     }
                 }
             }
@@ -274,7 +296,7 @@ function getCSSFontSize(matching) {
 }
 
 function textProcessing(pNode, str) {
-    var i, items, src = str, n = 0, node, tokenReg, paramReg, matched, a, b, c;
+    var i, items, src = str, n = 0, node, tokenReg, paramReg, matched, a, b, c, innode;
     //tokenReg = /\[\[([^\]]+)\]\]/;
     //paramReg = /[^\[\]\|]+/g;
     a = config.openParen ? config.openParen : "\\[";
@@ -354,6 +376,30 @@ function textProcessing(pNode, str) {
                     node = document.createElement("pre");
                     if (items[1] && items[1] != "") {
                         node.appendChild(document.createTextNode(items[1]));
+                    }
+                    pNode.appendChild(node);
+                    break;
+                case "highlight":
+                    innode = document.createElement("code");
+                    node = document.createElement("pre");
+                    if (items[1] && items[1] != "") {
+                        innode.setAttribute("class", items[1].trim());
+                    }
+                    if (items[2] && items[2] != "") {
+                        innode.appendChild(document.createTextNode(items[2]));
+                    }
+                    pNode.appendChild(node);
+                    node.appendChild(innode);
+                    hljs.highlightBlock(node);
+                    break;
+                case "link":
+                    node = document.createElement("a");
+                    if (items[1] && items[1] != "") {
+                        node.setAttribute("href", items[1].trim());
+                        node.setAttribute("target", "_blank");
+                    }
+                    if (items[2] && items[2] != "") {
+                        node.appendChild(document.createTextNode(items[2]));
                     }
                     pNode.appendChild(node);
                     break;

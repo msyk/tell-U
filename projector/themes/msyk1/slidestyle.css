@@ -19,11 +19,15 @@ BODY    {
 }
 
 .footer {
-    height: 30px;
+    height: 10px;
 }
 
 .left-side, .right-side {
     width: 40px;
+}
+
+.content    {
+    min-width: 1190px;
 }
 
 .title {
@@ -38,7 +42,7 @@ BODY    {
     text-shadow: 3px 3px 3px #969696;
 }
 
-.items  {
+.items .itemsmore  {
     font-size: 44px;
 }
 
@@ -132,4 +136,8 @@ DIV .code    {
     color: white;
     font-size: 24px;
     padding: 0 10px 0 10px;
+}
+
+.demo   {
+    color: red;
 }
