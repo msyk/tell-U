@@ -1,0 +1,147 @@
+DIV {
+    font-family: 游ゴシック体, 'Yu Gothic', YuGothic, 'ヒラギノ角ゴシック Pro', 'Hiragino Kaku Gothic Pro', メイリオ, Meiryo, Osaka, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+    font-size: 14pt;
+    color: black;
+}
+
+IMG {
+}
+
+BODY    {
+}
+
+.slide  {
+    background-image: url(cloud.jpg);
+}
+
+.header {
+    height: 0px;
+}
+
+.footer {
+    height: 10px;
+}
+
+.left-side, .right-side {
+    width: 40px;
+}
+
+.content    {
+    min-width: 1190px;
+}
+
+.title {
+    height: 100px;
+    border-bottom: dotted 2px gray;
+}
+
+.title-item {
+    font-size: 3em;
+    font-weight: bold;
+    color: #414141;
+    text-shadow: 3px 3px 3px #969696;
+}
+
+.items .itemsmore  {
+    font-size: 44px;
+}
+
+.centeritem-level1 {
+}
+
+.centeritem-level2 {
+}
+
+.centeritem-level3 {
+}
+
+.centeritem-level4 {
+}
+
+.coveritem-level1 {
+}
+
+.coveritem-level2 {
+}
+
+.coveritem-level3 {
+}
+
+.coveritem-level4 {
+}
+
+.item-level1 {
+    font-weight: bold;
+    color: #414141;
+    margin-top: 12px;
+}
+
+.item-level2 {
+    font-size: 85%;
+}
+
+.item-level3 {
+    font-size: 85%;
+}
+
+.item-level4 {
+    font-size: 85%;
+}
+
+.presubtitle    {
+    height: 100px;
+}
+
+.presubtitle-item    {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.maintitle    {
+    height: 300px;
+}
+
+.maintitle-item    {
+    font-size: 4.5em;
+    font-weight: bold;
+    text-shadow: 3px 3px 3px #a2a2a2;
+}
+
+.subtitle    {
+    height: 100px;
+}
+
+.subtitle-item    {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.coveritems  {
+    font-size: 40px;
+    margin-top: 80px;
+}
+
+.centertitle    {
+    height: 400px;
+}
+
+.centertitle-item    {
+    font-size: 4em;
+    font-weight: bold;
+    text-shadow: 3px 3px 3px #a1a1a1;
+}
+
+.centeritems  {
+    font-size: 40px;
+}
+
+DIV .code    {
+    background-color: black;
+    color: white;
+    font-size: 24px;
+    padding: 0 10px 0 10px;
+}
+
+.demo   {
+    color: red;
+}

@@ -309,19 +309,42 @@ HTML {
 :fullscreen {
 }
 
-
-.header .page    {
+.header .page {
     background-color: rgba(0, 0, 0, 0.4);
     width: 20px;
     height: 20px;
-    margin: 2px;
+    margin: 4px;
     color: whitesmoke;
     text-align: center;
     vertical-align: middle;
-    font-size: 12px;
+    font-size: 14px;
     border-radius: 8px;
+    float: right;
 }
 
 .footer .page {
     display: none;
+}
+
+.table {
+    flex-direction: row;
+    flex-grow: 0;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.table table {
+    margin: 0 auto 0 auto;
+}
+
+.table table td {
+    background-color: #c8cdaf;
+    text-align: center;
+}
+
+.table table th {
+    background-color: #56684c;
+    color: white;
+    text-align: center;
 }

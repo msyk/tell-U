@@ -4,7 +4,8 @@
 
 function loadSlide(loading, baseNode, showOnly) {
     var level, aItem, divNode, slideDelete, nodeSlides, nodeSlide, maxImgWidth = 100, w;
-    var i, j, node, nodes, nodeItem, cols, closeId = null, openId = null, closeZ = null, cKey;
+    var i, j, k, node, nodes, nodeItem, cols, closeId = null, openId = null, closeZ = null, cKey;
+    var tableNode, trNode, tdNode;
 
     // Get current slide.
     nodeSlides = document.getElementsByClassName("slide");
@@ -38,7 +39,7 @@ function loadSlide(loading, baseNode, showOnly) {
     for (i = 0; i < multiItemNodes.length; i++) {
         if (contents[slideNumber][multiItemNodes[i]]) {
             node = nodeSlide.getElementsByClassName(multiItemNodes[i])[0];
-            if(node) {
+            if (node) {
                 while (node.childNodes.length > 0) {
                     node.removeChild(node.childNodes[0]);
                 }
@@ -62,6 +63,36 @@ function loadSlide(loading, baseNode, showOnly) {
             }
         }
     }
+    // Set table node
+    if (contents[slideNumber]["table"]) {
+        node = nodeSlide.getElementsByClassName("table")[0];
+        if (node) {
+            while (node.childNodes.length > 0) {
+                node.removeChild(node.childNodes[0]);
+            }
+            tableNode = document.createElement("TABLE");
+            node.appendChild(tableNode);
+            for (j = 0; j < contents[slideNumber]["table"].length; j++) {
+                trNode = document.createElement("TR");
+                tableNode.appendChild(trNode);
+                for (k = 0; k < contents[slideNumber]["table"][j].length; k++) {
+                    nodeItem = contents[slideNumber]["table"][j][k];
+                    if (nodeItem.substr(0, 1) == "#") {
+                        tdNode = document.createElement("TH");
+                        nodeItem = nodeItem.substr(1);
+                    } else {
+                        tdNode = document.createElement("TD");
+                    }
+                    trNode.appendChild(tdNode);
+                    textProcessing(tdNode, nodeItem);
+                }
+            }
+            node.style.display = "flex";
+            node = nodeSlide.getElementsByClassName("detail")[0];
+            node.style.display = "flex";
+        }
+    }
+
 
     // Setup parallel nodes.
     var paraNodes = ["fig1", "fig2", "fig3", "items", "itemsmore"];
@@ -79,7 +110,7 @@ function loadSlide(loading, baseNode, showOnly) {
         for (i = 0; i < paraNodes.length; i++) {
             if (contents[slideNumber][paraNodes[i]]) {
                 nodeItem = nodeSlide.getElementsByClassName(paraNodes[i])[0];
-                if(nodeItem) {
+                if (nodeItem) {
                     if (cols == 1) {
                         node.style.justifyContent = "center";
                     }
@@ -101,7 +132,7 @@ function loadSlide(loading, baseNode, showOnly) {
     // Set page number
     nodes = document.getElementsByClassName("page");
     for (i = 0; i < nodes.length; i++) {
-        nodes[i].innerHTML = slideNumber;
+        nodes[i].appendChild(document.createTextNode(slideNumber + 1));
         if (!contents[slideNumber]["maintitle"]) {
             nodes[i].style.display = "";
         } else {
@@ -152,11 +183,11 @@ function loadSlide(loading, baseNode, showOnly) {
 }
 
 function adjust(nodeSlide) {
-    var k, fontSize, fSize, fUnit, minFSize, node,
+    var k, fontSize, fSize, fUnit, minFSize, node, boxSize, tableNode,
         nodeItem, sizeItems, sizeMore, itemsNode, moreNode, unitItems, unitMore;
-    var shrinkItems = ["title", "presubtitle", "maintitle", "subtitle", "centertitle"];
+    var shrinkItems = ["title", "presubtitle", /*"maintitle", "subtitle", "centertitle"*/];
     var shrinkLists = ["coveritems", "centeritems"];
-    var paraLists = ["items", "itemsmore", "fig1", "fig2", "fig3"];
+    var paraLists = ["items", "itemsmore", "fig1", "fig2", "fig3", "table"];
 
     if (!nodeSlide) {
         nodeSlide = document.getElementsByClassName("slide")[0];
@@ -223,14 +254,18 @@ function adjust(nodeSlide) {
                                 break;
                             }
                         }
-                        if (paraLists[k] == "items"){
+                        if (paraLists[k] == "items") {
                             itemsNode = nodeItem;
                             sizeItems = fSize;
                             unitItems = fUnit;
-                        } else if(paraLists[k] == "itemsmore") {
+                        } else if (paraLists[k] == "itemsmore") {
                             moreNode = nodeItem;
                             sizeMore = fSize;
                             unitMore = fUnit;
+                        } else if (paraLists[k] == "table") {
+                            boxSize = nodeItem.parentNode.clientWidth;
+                            tableNode = nodeItem.getElementsByTagName("TABLE")[0];
+                            tableNode.style.width = boxSize + "px";
                         }
                     }
                 } else {
@@ -257,8 +292,8 @@ function adjust(nodeSlide) {
             }
         }
     }
-    if (sizeItems > -1 && sizeMore > -1)    {
-        if (sizeItems > sizeMore)   {
+    if (sizeItems > -1 && sizeMore > -1) {
+        if (sizeItems > sizeMore) {
             itemsNode.style.fontSize = sizeMore + unitMore;
         } else {
             moreNode.style.fontSize = sizeItems + unitItems;
@@ -329,99 +364,113 @@ function textProcessing(pNode, str) {
         pNode.appendChild(document.createTextNode(src.substr(0, n)));
         if (items[0]) {
             switch (items[0].toLowerCase().trim()) {
-                case "img":
-                    node = document.createElement("IMG");
-                    if (items[1] && items[1].trim() != "") {
-                        node.setAttribute("src", items[1].trim());
-                    }
-                    if (items[2] && items[2].trim() != "") {
-                        node.style.width = items[2].trim();
-                    }
-                    if (items[3] && items[3].trim() != "") {
-                        node.style.height = items[3];
-                    }
-                    pNode.appendChild(node);
-                    break;
-                case "b":
-                    node = document.createElement("STRONG");
-                    if (items[1] && items[1] != "") {
-                        node.appendChild(document.createTextNode(items[1]));
-                    }
-                    pNode.appendChild(node);
-                    break;
-                case "br":
-                    node = document.createElement("BR");
-                    pNode.appendChild(node);
-                    break;
-                case "hr":
-                    node = document.createElement("HR");
-                    pNode.appendChild(node);
-                    break;
-                case "u":
-                    node = document.createElement("U");
-                    if (items[1] && items[1] != "") {
-                        node.appendChild(document.createTextNode(items[1]));
-                    }
-                    pNode.appendChild(node);
-                    break;
-                case "i":
-                    node = document.createElement("I");
-                    if (items[1] && items[1] != "") {
-                        node.appendChild(document.createTextNode(items[1]));
-                    }
-                    pNode.appendChild(node);
-                    break;
-                case "span":
-                    node = document.createElement("SPAN");
-                    if (items[1] && items[1].trim() != "") {
-                        node.setAttribute("class", items[1].trim());
-                    }
-                    if (items[2] && items[2] != "") {
-                        node.appendChild(document.createTextNode(items[2]));
-                    }
-                    pNode.appendChild(node);
-                    break;
-                case "div":
-                    node = document.createElement("DIV");
-                    if (items[1] && items[1].trim() != "") {
-                        node.setAttribute("class", items[1].trim());
-                    }
-                    if (items[2] && items[2] != "") {
-                        node.appendChild(document.createTextNode(items[2]));
-                    }
-                    pNode.appendChild(node);
-                    break;
-                case "pre":
-                    node = document.createElement("pre");
-                    if (items[1] && items[1] != "") {
-                        node.appendChild(document.createTextNode(items[1]));
-                    }
-                    pNode.appendChild(node);
-                    break;
-                case "highlight":
-                    innode = document.createElement("code");
-                    node = document.createElement("pre");
-                    if (items[1] && items[1] != "") {
-                        innode.setAttribute("class", items[1].trim());
-                    }
-                    if (items[2] && items[2] != "") {
-                        innode.appendChild(document.createTextNode(items[2]));
-                    }
-                    pNode.appendChild(node);
-                    node.appendChild(innode);
-                    hljs.highlightBlock(node);
-                    break;
-                case "link":
-                    node = document.createElement("a");
-                    if (items[1] && items[1] != "") {
-                        node.setAttribute("href", items[1].trim());
-                        node.setAttribute("target", "_blank");
-                    }
-                    if (items[2] && items[2] != "") {
-                        node.appendChild(document.createTextNode(items[2]));
-                    }
-                    pNode.appendChild(node);
-                    break;
+            case "img":
+                node = document.createElement("IMG");
+                if (items[1] && items[1].trim() != "") {
+                    node.setAttribute("src", items[1].trim());
+                }
+                if (items[2] && items[2].trim() != "") {
+                    node.style.width = items[2].trim();
+                }
+                if (items[3] && items[3].trim() != "") {
+                    node.style.height = items[3];
+                }
+                pNode.appendChild(node);
+                break;
+            case "imgflow":
+                node = document.createElement("IMG");
+                node.style.float = "right";
+                if (items[1] && items[1].trim() != "") {
+                    node.setAttribute("src", items[1].trim());
+                }
+                if (items[2] && items[2].trim() != "") {
+                    node.style.width = items[2].trim();
+                }
+                if (items[3] && items[3].trim() != "") {
+                    node.style.height = items[3];
+                }
+                pNode.appendChild(node);
+                break;
+            case "b":
+                node = document.createElement("STRONG");
+                if (items[1] && items[1] != "") {
+                    node.appendChild(document.createTextNode(items[1]));
+                }
+                pNode.appendChild(node);
+                break;
+            case "br":
+                node = document.createElement("BR");
+                pNode.appendChild(node);
+                break;
+            case "hr":
+                node = document.createElement("HR");
+                pNode.appendChild(node);
+                break;
+            case "u":
+                node = document.createElement("U");
+                if (items[1] && items[1] != "") {
+                    node.appendChild(document.createTextNode(items[1]));
+                }
+                pNode.appendChild(node);
+                break;
+            case "i":
+                node = document.createElement("I");
+                if (items[1] && items[1] != "") {
+                    node.appendChild(document.createTextNode(items[1]));
+                }
+                pNode.appendChild(node);
+                break;
+            case "span":
+                node = document.createElement("SPAN");
+                if (items[1] && items[1].trim() != "") {
+                    node.setAttribute("class", items[1].trim());
+                }
+                if (items[2] && items[2] != "") {
+                    node.appendChild(document.createTextNode(items[2]));
+                }
+                pNode.appendChild(node);
+                break;
+            case "div":
+                node = document.createElement("DIV");
+                if (items[1] && items[1].trim() != "") {
+                    node.setAttribute("class", items[1].trim());
+                }
+                if (items[2] && items[2] != "") {
+                    node.appendChild(document.createTextNode(items[2]));
+                }
+                pNode.appendChild(node);
+                break;
+            case "pre":
+                node = document.createElement("pre");
+                if (items[1] && items[1] != "") {
+                    node.appendChild(document.createTextNode(items[1]));
+                }
+                pNode.appendChild(node);
+                break;
+            case "highlight":
+                innode = document.createElement("code");
+                node = document.createElement("pre");
+                if (items[1] && items[1] != "") {
+                    innode.setAttribute("class", items[1].trim());
+                }
+                if (items[2] && items[2] != "") {
+                    innode.appendChild(document.createTextNode(items[2]));
+                }
+                pNode.appendChild(node);
+                node.appendChild(innode);
+                hljs.highlightBlock(node);
+                break;
+            case "link":
+                node = document.createElement("a");
+                if (items[1] && items[1] != "") {
+                    node.setAttribute("href", items[1].trim());
+                    node.setAttribute("target", "_blank");
+                }
+                if (items[2] && items[2] != "") {
+                    node.appendChild(document.createTextNode(items[2]));
+                }
+                pNode.appendChild(node);
+                break;
             }
         }
         src = src.substr(n + matched[0].length);
